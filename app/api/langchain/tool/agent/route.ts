@@ -75,9 +75,7 @@ async function handle(req: NextRequest) {
     const token = authToken.trim().replaceAll("Bearer ", "").trim();
     const isOpenAiKey = !token.startsWith(ACCESS_CODE_PREFIX);
     let useTools = reqBody.useTools ?? [];
-    let apiKey = serverConfig.apiKey;
     if (isOpenAiKey && token) {
-      apiKey = token;
     }
 
     // support base url
