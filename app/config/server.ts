@@ -4,11 +4,9 @@ import { DEFAULT_MODELS } from "../constant";
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      OPENAI_API_KEY?: string;
       CODE?: string;
       BASE_URL?: string;
       PROXY_URL?: string;
-      OPENAI_ORG_ID?: string;
       VERCEL?: string;
       HIDE_USER_API_KEY?: string; // disable user's api key input
       DISABLE_GPT4?: string; // allow user to use gpt-4 or not
@@ -52,7 +50,6 @@ export const getServerSideConfig = () => {
   }
 
   return {
-    apiKey: process.env.OPENAI_API_KEY,
     code: process.env.CODE,
     codes: ACCESS_CODES,
     needCode: ACCESS_CODES.size > 0,
