@@ -210,13 +210,11 @@ async function handle(req: NextRequest) {
       {
         temperature: 0,
         modelName: reqBody.model,
-        openAIApiKey: apiKey,
       },
       { basePath: baseUrl },
     );
     const embeddings = new OpenAIEmbeddings(
       {
-        openAIApiKey: apiKey,
       },
       { basePath: baseUrl },
     );
@@ -268,7 +266,6 @@ async function handle(req: NextRequest) {
     const llm = new ChatOpenAI(
       {
         modelName: reqBody.model,
-        openAIApiKey: apiKey,
         temperature: reqBody.temperature,
         streaming: reqBody.stream,
         topP: reqBody.top_p,
