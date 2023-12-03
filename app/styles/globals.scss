@@ -1,0 +1,367 @@
+@import "./animation.scss";
+@import "./window.scss";
+
+@mixin light {
+  --theme: light;
+
+  /* Dramatically enhanced color scheme */
+  --white: #e2e8e1; /* A deeper off-white, like the warm glow of fire on stone */
+  --black: #453C34; /* Rich dark brown, intensifying the sense of depth */
+  --gray: #A48670; /* A darker, more saturated earthy gray, reminiscent of natural minerals */
+  --primary: #7B4A3D; /* A deeper shade of red, simulating the color of aged, rich ochre */
+  --second: #8F6956; /* A darker, more intense sienna, akin to shadowed alcoves */
+  --hover-color: #BB856F; /* A warmer, more vibrant color for hover states, like dancing flames */
+  --bar-color: rgba(69, 60, 52, 0.15); /* A darker bar color for added depth */
+  --theme-color: var(--gray); /* Keeping the richer, earthy gray as the theme color */
+
+  /* More pronounced shadows */
+  --shadow: 50px 50px 100px 15px rgba(45, 40, 35, 0.2);
+  --card-shadow: 0px 3px 6px 1px rgba(45, 40, 35, 0.1);
+
+  /* Stronger strokes for structure */
+  --border-in-light: 1px solid #A48670;
+}
+
+
+@mixin dark {
+  --theme: dark;
+
+  /* Intensified mysterious color scheme #2B2622 */
+  --white: #171412; /* A creamier off-white, reflecting dim cave lighting */
+  --black: #DDD6CD; /* A deeper, almost black-brown, for an enveloping cave-like feel */
+  --gray: #786D62; /* A significantly darker gray, suggesting the coolness of twilight */
+  --primary: #67544B; /* A darker maroon, echoing the profundity of cosmic mysteries */
+  --second: #391e0c; /* A shadowy, deeper tone for secondary elements */
+  --hover-color: #8C7A6E; /* A muted, earthy tone for hover states, like soft night shadows */
+  --bar-color: rgba(221, 214, 205, 0.2); /* A darker, more prominent bar color for the dark theme */
+  --theme-color: var(--gray); /* The deeper twilight gray as the main theme color */
+
+  /* Dramatic shadows for a cave-like ambiance */
+  --shadow: 50px 50px 100px 20px rgba(27, 24, 22, 0.95);
+  --card-shadow: 0px 4px 8px 1px rgba(27, 24, 22, 0.6);
+
+  /* Visible strokes for delineation */
+  --border-in-dark: 1px solid rgba(120, 109, 98, 0.25);
+
+}
+
+
+
+
+.light {
+  @include light;
+}
+
+.dark {
+  @include dark;
+}
+
+.mask {
+  filter: invert(0.8); /* An inversion filter for masked elements to match the dark theme */
+}
+
+:root {
+  @include light;
+
+  --window-width: 90vw;
+  --window-height: 90vh;
+  --sidebar-width: 300px;
+  --window-content-width: calc(100% - var(--sidebar-width));
+  --message-max-width: 80%;
+  --full-height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --window-width: 100vw;
+    --window-height: var(--full-height);
+    --sidebar-width: 100vw;
+    --window-content-width: var(--window-width);
+    --message-max-width: 100%;
+  }
+
+  .no-mobile {
+    display: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include dark;
+  }
+}
+html {
+  height: var(--full-height);
+
+  font-family: "Noto Sans", "SF Pro SC", "SF Pro Text", "SF Pro Icons",
+    "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+}
+
+body {
+  background-color: var(--gray);
+  color: var(--black);
+  margin: 0;
+  padding: 0;
+  height: var(--full-height);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  touch-action: pan-x pan-y;
+  overflow: hidden;
+
+  @media only screen and (max-width: 600px) {
+    background-color: var(--second);
+  }
+}
+
+::-webkit-scrollbar {
+  --bar-width: 5px;
+  width: var(--bar-width);
+  height: var(--bar-width);
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bar-color);
+  border-radius: 20px;
+  background-clip: content-box;
+  border: 1px solid transparent;
+}
+
+select {
+  border: var(--border-in-light);
+  padding: 10px;
+  border-radius: 10px;
+  appearance: none;
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--black);
+  text-align: center;
+}
+
+label {
+  cursor: pointer;
+}
+
+input {
+  text-align: center;
+  font-family: inherit;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  background-color: var(--white);
+  color: var(--black);
+  appearance: none;
+  border: var(--border-in-light);
+  border-radius: 5px;
+  height: 16px;
+  width: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input[type="checkbox"]:checked::after {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary);
+  content: " ";
+  border-radius: 2px;
+}
+
+input[type="range"] {
+  appearance: none;
+  background-color: var(--white);
+  color: var(--black);
+}
+
+@mixin thumb() {
+  appearance: none;
+  height: 8px;
+  width: 20px;
+  background-color: var(--primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  margin-left: 5px;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  @include thumb();
+}
+
+input[type="range"]::-moz-range-thumb {
+  @include thumb();
+}
+
+input[type="range"]::-ms-thumb {
+  @include thumb();
+}
+
+@mixin thumbHover() {
+  transform: scaleY(1.2);
+  width: 24px;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  @include thumbHover();
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  @include thumbHover();
+}
+
+input[type="range"]::-ms-thumb:hover {
+  @include thumbHover();
+}
+
+input[type="number"],
+input[type="text"],
+input[type="password"] {
+  appearance: none;
+  border-radius: 10px;
+  border: var(--border-in-light);
+  min-height: 36px;
+  box-sizing: border-box;
+  background: var(--white);
+  color: var(--black);
+  padding: 0 10px;
+  max-width: 50%;
+  font-family: inherit;
+}
+
+div.math {
+  overflow-x: auto;
+}
+
+.modal-mask {
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: var(--full-height);
+  width: 100vw;
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: 600px) {
+    align-items: flex-end;
+  }
+}
+
+.link {
+  font-size: 12px;
+  color: var(--primary);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+pre {
+  position: relative;
+
+  &:hover .copy-code-button {
+    pointer-events: all;
+    transform: translateX(0px);
+    opacity: 0.5;
+  }
+
+  .copy-code-button {
+    position: absolute;
+    right: 10px;
+    top: 1em;
+    cursor: pointer;
+    padding: 0px 5px;
+    background-color: var(--black);
+    color: var(--white);
+    border: var(--border-in-light);
+    border-radius: 10px;
+    transform: translateX(10px);
+    pointer-events: none;
+    opacity: 0;
+    transition: all ease 0.3s;
+
+    &:after {
+      content: "copy";
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+  &:focus {
+    filter: brightness(0.95);
+  }
+}
+
+.error {
+  width: 80%;
+  border-radius: 20px;
+  border: var(--border-in-light);
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+  overflow: auto;
+  background-color: var(--white);
+  color: var(--black);
+
+  pre {
+    overflow: auto;
+  }
+}
+
+.password-input-container {
+  max-width: 50%;
+  display: flex;
+  justify-content: flex-end;
+
+  .password-eye {
+    margin-right: 4px;
+  }
+
+  .password-input {
+    min-width: 80%;
+  }
+}
+
+.user-avatar {
+  height: 30px;
+  min-height: 30px;
+  width: 30px;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-in-light);
+  box-shadow: var(--card-shadow);
+  border-radius: 11px;
+}
+
+.one-line {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copyable {
+  user-select: text;
+}
