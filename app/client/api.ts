@@ -79,7 +79,6 @@ interface ChatProvider {
   name: ProviderName;
   apiConfig: {
     baseUrl: string;
-    apiKey: string;
     summaryModel: Model;
   };
   models: Model[];
