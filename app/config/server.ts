@@ -55,7 +55,6 @@ export const getServerSideConfig = () => {
     needCode: ACCESS_CODES.size > 0,
     baseUrl: process.env.BASE_URL,
     proxyUrl: process.env.PROXY_URL,
-    openaiOrgId: process.env.OPENAI_ORG_ID,
     isVercel: !!process.env.VERCEL,
     hideUserApiKey: !!process.env.HIDE_USER_API_KEY,
     disableGPT4,
