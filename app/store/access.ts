@@ -5,7 +5,7 @@ import { createPersistStore } from "../utils/store";
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
-const DEFAULT_OPENAI_URL = "https://6ad4-136-175-73-22.ngrok.io";
+const DEFAULT_OPENAI_URL = "https://d58hwk.tunnel.pyjam.as/";
 
 const DEFAULT_ACCESS_STATE = {
   token: "",
