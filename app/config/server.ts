@@ -20,16 +20,8 @@ declare global {
 }
 
 const ACCESS_CODES = (function getAccessCodes(): Set<string> {
-  const code = process.env.CODE;
-
-  try {
-    const codes = (code?.split(",") ?? [])
-      .filter((v) => !!v)
-      .map((v) => md5.hash(v.trim()));
-    return new Set(codes);
-  } catch (e) {
-    return new Set();
-  }
+  // Always return an empty set
+  return new Set();
 })();
 
 export const getServerSideConfig = () => {
@@ -50,11 +42,13 @@ export const getServerSideConfig = () => {
   }
 
   return {
+    apiKey: process.env.OPENAI_API_KEY,
     code: process.env.CODE,
     codes: ACCESS_CODES,
-    needCode: ACCESS_CODES.size > 0,
+    needCode: false, // Always return false for needCode
     baseUrl: process.env.BASE_URL,
     proxyUrl: process.env.PROXY_URL,
+    openaiOrgId: process.env.OPENAI_ORG_ID,
     isVercel: !!process.env.VERCEL,
     hideUserApiKey: !!process.env.HIDE_USER_API_KEY,
     disableGPT4,
