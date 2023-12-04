@@ -15,6 +15,7 @@ const DEFAULT_ACCESS_STATE = {
   hideBalanceQuery: true,
   disableGPT4: true,
   disableFastLink: true,
+  customModels: "",
 
   openaiUrl: DEFAULT_OPENAI_URL,
 };
