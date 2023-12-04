@@ -13,5 +13,4 @@ export function auth(req: NextRequest) {
   return {
     error: false,
   };
-};
 }
