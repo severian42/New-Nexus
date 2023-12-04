@@ -803,6 +803,7 @@ export function Settings() {
             <></>
           )}
 
+{/*
           {!accessStore.hideUserApiKey ? (
             <>
               <ListItem
@@ -812,7 +813,7 @@ export function Settings() {
                 <input
                   type="text"
                   value={accessStore.openaiUrl}
-                  placeholder="https://api.openai.com/"
+                  placeholder="https://6ad4-136-175-73-22.ngrok.io"
                   onChange={(e) =>
                     accessStore.update(
                       (access) => (access.openaiUrl = e.currentTarget.value),
@@ -837,7 +838,7 @@ export function Settings() {
               </ListItem>
             </>
           ) : null}
-
+                */}
         </List>
 
         <List>
