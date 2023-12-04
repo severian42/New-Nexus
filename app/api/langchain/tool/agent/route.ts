@@ -59,13 +59,7 @@ async function handle(req: NextRequest) {
   if (req.method === "OPTIONS") {
     return NextResponse.json({ body: "OK" }, { status: 200 });
   }
-  try {
-    const authResult = auth(req);
-    if (authResult.error) {
-      return NextResponse.json(authResult, {
-        status: 401,
-      });
-    }
+
 
     const encoder = new TextEncoder();
     const transformStream = new TransformStream();
