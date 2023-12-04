@@ -5,19 +5,16 @@ import { createPersistStore } from "../utils/store";
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
 
-const DEFAULT_OPENAI_URL =
-  getClientConfig()?.buildMode === "export" ? DEFAULT_API_HOST : "/api/openai/";
-console.log("[API] default openai url", DEFAULT_OPENAI_URL);
+const DEFAULT_OPENAI_URL = "https://6ad4-136-175-73-22.ngrok.io";
 
 const DEFAULT_ACCESS_STATE = {
   token: "",
   accessCode: "",
-  needCode: true,
-  hideUserApiKey: false,
-  hideBalanceQuery: false,
-  disableGPT4: false,
-  disableFastLink: false,
-  customModels: "",
+  needCode: false,
+  hideUserApiKey: true,
+  hideBalanceQuery: true,
+  disableGPT4: true,
+  disableFastLink: true,
 
   openaiUrl: DEFAULT_OPENAI_URL,
 };
