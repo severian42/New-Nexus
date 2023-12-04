@@ -286,13 +286,13 @@ async function handle(req: NextRequest) {
     return new Response(transformStream.readable, {
       headers: { "Content-Type": "text/event-stream" },
     });
-  } catch (e) {
-    return new Response(JSON.stringify({ error: (e as any).message }), {
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
+} catch (e) {
+  return new Response(JSON.stringify({ error: (e as any).message }), {
+    status: 500,
+    headers: { "Content-Type": "application/json" },
+  });
 }
+
 
 export const GET = handle;
 export const POST = handle;
