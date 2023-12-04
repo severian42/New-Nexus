@@ -5,6 +5,8 @@ import { collectModelTable } from "../utils/model";
 
 const serverConfig = getServerSideConfig();
 
+const BASE_URL='https://dragonnext-unicorn-proxy.hf.space/proxy/ai21'
+
 export async function requestOpenai(req: NextRequest) {
   const controller = new AbortController();
   const openaiPath = `${req.nextUrl.pathname}${req.nextUrl.search}`.replaceAll(
@@ -12,15 +14,14 @@ export async function requestOpenai(req: NextRequest) {
     "",
   );
 
-  let baseUrl = process.env.BASE_URL;
-  if (!baseUrl) {
-    throw new Error('BASE_URL is not defined');
-  }
-
+  const BASE_URL='https://dragonnext-unicorn-proxy.hf.space/proxy/ai21'
+  
+  let baseUrl = BASE_URL;
+  
   if (!baseUrl.startsWith("http")) {
     baseUrl = `https://${baseUrl}`;
   }
-
+  
   if (baseUrl.endsWith("/")) {
     baseUrl = baseUrl.slice(0, -1);
   }
