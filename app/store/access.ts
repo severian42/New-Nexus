@@ -25,7 +25,7 @@ export const useAccessStore = createPersistStore(
 
   (set, get) => ({
     enabledAccessControl() {
-      return false;
+      return true;
     },
     isAuthorized() {
       return true;
