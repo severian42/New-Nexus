@@ -283,18 +283,19 @@ async function handle(req: NextRequest) {
     );
 
     console.log("returning response");
-    return new Response(transformStream.readable, {
-      headers: { "Content-Type": "text/event-stream" },
-    });
-} catch (e) {
-  return new Response(JSON.stringify({ error: (e as any).message }), {
-    status: 500,
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
-
-export const GET = handle;
-export const POST = handle;
-
-export const runtime = "edge";
+    try {
+      return new Response(transformStream.readable, {
+        headers: { "Content-Type": "text/event-stream" },
+      });
+    } catch (e) {
+      return new Response(JSON.stringify({ error: (e as any).message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }
+  
+  export const GET = handle;
+  export const POST = handle;
+  
+  export const runtime = "edge";
